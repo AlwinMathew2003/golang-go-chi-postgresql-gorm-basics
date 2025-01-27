@@ -1,0 +1,17 @@
+1. Firstly created the model for books in the models folder
+2. Creating the BookRepo in the repository folder
+- Inside the book repository it only defines the methods to save the books data.(Abstraction)
+- So inorder to do that we should create an interface to define its methods.
+
+# How the request work the clean architecture
+
+- Firstly the user sends an http request /posts then it will move to the sepcified controller
+- In this controller (Services is dependent to the controller) it gets the data from the request body
+and then passes the data to the services.(which is in usescases) It takes care about the data validation
+and then it is called to the repositories where the method called by services is defined.
+- The methods will be onliy defined inside the repository file, Its implementation will be inside the database
+
+=> Inorder to do these we should initialize these:
+- bookRepo := &database.BookeRepository{DB:db}
+- bookService := &usecases.BookService{BookRepo:bookRepo}
+- bookController := &controller.BookController{BookService:bookService}
